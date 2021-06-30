@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+
+
+        <h1 id="demo">Hi</h1>
+
+        <script type="text/javascript" src="https://code.responsivevoice.org/responsivevoice.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script>
+            responsiveVoice.speak('hi i am testing');
+            var myVoice = document.getElementById('demo');
+            window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            const recognition = new window.SpeechRecognition();
+            recognition.interimResults = true;
+
+            recognition.addEventListener('result', (e) => {
+                const text = Array.from(e.results)
+                .map(result => result[0])
+                .map(result => result.transcript)
+                .join('');
+                myVoice.innerHTML = text;
+
+                if(text.includes("hello")){
+                    console.log('hey there');
+                }
+            });
+
+            recognition.addEventListener('end', ()=>{
+                recognition.start();
+            });
+            recognition.start();
+        </script>
+    </body>
+</html>
